@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
 
   def soft_user?
     self.email.empty?
-  emd
+  end
 end
