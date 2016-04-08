@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :tasks, dependent: :destroy
+
+  def soft_user?
+    self.email.empty?
+  emd
 end
