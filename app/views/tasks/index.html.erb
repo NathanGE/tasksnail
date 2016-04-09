@@ -2,30 +2,18 @@
 
 <h1>Listing Tasks</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Complete</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="my-tasks">
+  <% @tasks.each do |task| %>
+    <%= render task %>
+  <% end %>
+</div>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.complete %></td>
-        <td><%= task.user %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="complete-tasks">
+  <% @tasks.complete.each do |task| %>
+    <h3><%= task.name %></h3>
+  <% end %>
+</div>
 
-<br>
+<%= link_to “New Task”, new_task_path, remote: true, class: “new-task-button” %>
 
 <%= link_to 'New Task', new_task_path %>

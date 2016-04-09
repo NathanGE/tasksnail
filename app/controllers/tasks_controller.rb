@@ -3,7 +3,9 @@ class TasksController < ApplicationController
   respond_to :html, :json
 
   def index
-    @tasks = Task.all
+    @user = current_user
+    @tasks = @user.tasks.all
+    respond_with(@tasks)
   end
 
   def show
@@ -46,6 +48,11 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def complete
+    @task = Task.find(params[:id])
+    @task.mark_complete!
   end
 
   private

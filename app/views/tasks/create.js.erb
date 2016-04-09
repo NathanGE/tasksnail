@@ -1,0 +1,3 @@
+$('form').hide();
+$('.my-tasks').append("<%= j render partial: 'task', locals: {task: @task} %>");
+$('.new-task-button').show();
