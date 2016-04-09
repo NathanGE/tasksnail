@@ -8,4 +8,11 @@ class User < ActiveRecord::Base
   def soft_user?
     self.email.empty?
   end
+
+  def needs_engagement?
+    tasks = Task.where(soft_token: self.soft_token)
+    if self.soft_user? && tasks.count >= 2
+      true
+    end
+  end
 end
